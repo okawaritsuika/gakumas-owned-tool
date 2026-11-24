@@ -1,0 +1,45 @@
+import STAGES from "../csv/stages.csv.mjs";
+import { deserializeEffectSequence } from "../utils/effects.js";
+import { lazyParse } from "../utils/lazyParse.js";
+
+STAGES.forEach((stage) => {
+  const [vo, da, vi] = stage.criteria.split(",").map((p) => parseFloat(p));
+  stage.criteria = { vocal: vo, dance: da, visual: vi };
+  const [voT, daT, viT] = stage.turnCounts
+    .split(",")
+    .map((p) => parseInt(p, 10));
+  stage.turnCounts = { vocal: voT, dance: daT, visual: viT };
+  const [voFt, daFt, viFt] = stage.firstTurns
+    .split(",")
+    .map((p) => parseFloat(p));
+  stage.firstTurns = { vocal: voFt, dance: daFt, visual: viFt };
+  // A single count is parsed as a number, so split its string form.
+  stage.linkTurnCounts = String(stage.linkTurnCounts ?? "")
+    .split(",")
+    .map((p) => parseInt(p, 10));
+});
+
+const parsed = lazyParse(STAGES, (stage) => {
+  stage.effects = deserializeEffectSequence(stage.effects);
+});
+
+const STAGES_BY_ID = STAGES.reduce((acc, cur) => {
+  acc[cur.id] = cur;
+  return acc;
+}, Object.create(null));
+
+class Stages {
+  static getAll() {
+    return parsed.all();
+  }
+
+  static getById(id) {
+    return parsed.one(STAGES_BY_ID[id]);
+  }
+
+  static findLast(predicate) {
+    return parsed.one(STAGES.findLast(predicate));
+  }
+}
+
+export default Stages;

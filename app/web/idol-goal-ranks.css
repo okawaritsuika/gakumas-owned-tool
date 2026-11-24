@@ -1,0 +1,51 @@
+.idol-goal-panel { min-width: 0; margin: 0 clamp(8px, 1.5vw, 18px) 16px; }
+.idol-goal-controls { display: flex; flex-wrap: wrap; align-items: end; gap: 8px 16px; margin: 4px 0 16px; }
+.idol-goal-controls label, .idol-custom-choice label { display: grid; gap: 4px; font-weight: 600; font-size: .8rem; }
+.idol-goal-controls select, .idol-custom-choice select { min-width: 0; max-width: 100%; padding: 6px 9px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); color: var(--ink); font: inherit; }
+.idol-gallery-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 8px 0; }
+.idol-gallery-heading h3 { margin: 0; font-size: 1rem; line-height: 1.4; }
+.idol-gallery-heading.outfit-heading { margin: 18px 0 10px; }
+.idol-goal-caption { font-size: .82rem; color: var(--muted); }
+.idol-custom-choice { font-size: .78rem; color: var(--muted); }
+.idol-custom-choice > summary { cursor: pointer; }
+.idol-custom-choice label { margin-top: 6px; }
+
+#idolGoalPanel, #recommendIdolDialog { container-type: inline-size; }
+#idolGoalPanel .pidol-character-rail, #recommendIdolDialog .pidol-character-rail {
+  --characters: 10;
+  display: grid; grid-auto-flow: column;
+  grid-auto-columns: calc((100% - (var(--characters) - 1) * 7px) / var(--characters));
+  gap: 7px; align-items: stretch; min-width: 0;
+  padding: 2px 0 5px; overflow-x: auto; scrollbar-width: thin;
+  scroll-padding: 0; scroll-snap-type: x mandatory; overscroll-behavior-x: contain;
+}
+#idolGoalPanel .pidol-character-rail .character-tile, #recommendIdolDialog .pidol-character-rail .character-tile {
+  width: 100%; min-width: 0; display: grid; align-content: start; border: 1px solid var(--line);
+  border-radius: 8px; padding: 0; overflow: hidden; scroll-snap-align: start; background: var(--paper); color: var(--ink);
+}
+#recommendIdolDialog .pidol-character-rail.is-dragging { scroll-snap-type: none; user-select: none; cursor: grabbing; }
+#idolGoalPanel .pidol-character-rail .character-tile.selected, #recommendIdolDialog .pidol-character-rail .character-tile.selected {
+  border-color: var(--academy-orange-deep, #99550b); background: #fff6df; box-shadow: inset 0 -2px #cb7800;
+}
+#idolGoalPanel .pidol-character-rail .character-art, #recommendIdolDialog .pidol-character-rail .character-art {
+  width: 100%; height: 54px; aspect-ratio: auto; border-radius: 0; background: #faf6ee;
+}
+#idolGoalPanel .character-art img, #recommendIdolDialog .pidol-character-rail .character-art img { object-fit: contain; }
+#idolGoalPanel .character-tile-copy, #recommendIdolDialog .pidol-character-rail .character-tile-copy {
+  display: grid; place-content: center; min-height: 30px; padding: 3px;
+}
+#idolGoalPanel .character-name, #recommendIdolDialog .pidol-character-rail .character-name {
+  font-size: .74rem; line-height: 1.3; font-weight: 650; word-break: keep-all;
+}
+@container (max-width: 860px) {
+  #idolGoalPanel .pidol-character-rail, #recommendIdolDialog .pidol-character-rail { --characters: 8; }
+}
+@container (max-width: 640px) {
+  #idolGoalPanel .pidol-character-rail, #recommendIdolDialog .pidol-character-rail { --characters: 6; }
+}
+@container (max-width: 460px) {
+  #idolGoalPanel .pidol-character-rail, #recommendIdolDialog .pidol-character-rail { --characters: 4; }
+}
+@container (max-width: 300px) {
+  #idolGoalPanel .pidol-character-rail, #recommendIdolDialog .pidol-character-rail { --characters: 3; }
+}

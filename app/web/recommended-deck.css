@@ -1,0 +1,68 @@
+.recommended-deck {
+  margin: 14px 0;
+  padding: 16px;
+  border: 1px solid #e9c998;
+  border-radius: 12px;
+  background: #fffaf1;
+  color: #31251b;
+  min-width: 0;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+.recommended-deck .deck-heading {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px 16px;
+  margin-bottom: 9px;
+}
+.recommended-deck .deck-heading h3 { margin: 0; font-size: 1.18rem; }
+.deck-heading label { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 8px; font-size: .85rem; font-weight: 650; }
+.deck-heading select { min-height: 34px; width: auto; padding: 4px 24px 4px 8px; font-size: .85rem; }
+.recommended-deck .deck-order {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin: 0;
+  padding: 8px 10px;
+  border-radius: 7px;
+  background: #faedda;
+  font-size: .93rem;
+  line-height: 1.45;
+  font-weight: 650;
+}
+.deck-order > strong { white-space: nowrap; color: #82440e; }
+.deck-order > span { min-width: 0; overflow-wrap: anywhere; }
+.deck-order span span { color: #875024; }
+.recommended-deck .deck-reason, .recommended-deck .deck-late {
+  margin: 6px 0 0;
+  color: #634a34;
+  font-size: .84rem;
+  line-height: 1.45;
+}
+.recommended-deck .deck-group { margin-top: 12px; }
+.recommended-deck .deck-group h4 { margin: 0 0 5px; font-size: .88rem; }
+.deck-cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(min(220px,100%),1fr)); gap: 7px; }
+.deck-card { min-width: 0; padding: 8px 10px; border: 1px solid #e9d9bc; border-radius: 8px; background: #fff; }
+.deck-card-heading { display: flex; gap: 4px 9px; align-items: center; flex-wrap: wrap; justify-content: space-between; }
+.deck-card-heading .memory-skill-visual { font-size: .95rem; font-weight: 750; white-space: normal; min-width: 0; }
+.deck-card-timing { padding: 2px 6px; border-radius: 4px; color: #674016; background: #fff2dc; font-size: .78rem; font-weight: 700; }
+.deck-card-source { display: inline-block; margin: 3px 0 0; color: #665949; font-size: .76rem; }
+.recommended-deck .deck-card p { margin: 4px 0 0; font-size: .86rem; line-height: 1.45; color: #3e2f24; }
+.deck-card-badges { display: grid; gap: 4px; margin: 5px 0 0; padding: 0; list-style: none; color: #513e29; font-size: .81rem; line-height: 1.45; }
+.deck-card-guide { display: grid; gap: 4px; margin: 5px 0; font-size: .84rem; line-height: 1.4; }
+.deck-card-guide div { display: grid; grid-template-columns: 2.2em minmax(0,1fr); gap: 4px; }
+.deck-card-guide dt { color: #75502f; font-weight: 700; }
+.deck-card-guide dd { margin: 0; }
+.deck-card-badges li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 5px; }
+.deck-card-badges strong { border-radius: 4px; padding: 1px 5px; color: #713807; background: #faedda; font-size: .76rem; }
+.deck-card-badges .deck-customize { color: #324b82; background: #e9efff; }
+.deck-card-badges .deck-required { color: #8a3029; background: #fae6e1; }
+.recommended-deck .deck-skip { color: #5c4831; }
+.recommended-deck .deck-card .deck-card-hif { color: #614318; font-weight: 620; }
+@media (max-width: 560px) {
+  .recommended-deck { padding: 11px; }
+  .deck-cards { grid-template-columns: minmax(0,1fr); }
+  .recommended-deck .deck-card { padding: 7px 8px; }
+}

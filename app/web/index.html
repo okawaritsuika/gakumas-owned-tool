@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f39800">
+  <title>학마 보유노트</title>
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/guides.css">
+  <link rel="stylesheet" href="/personalized.css">
+  <link rel="stylesheet" href="/memory-visuals.css">
+  <link rel="stylesheet" href="/simple-view.css">
+  <link rel="stylesheet" href="/playbook.css">
+  <link rel="stylesheet" href="/source-recipe-readiness.css">
+  <link rel="stylesheet" href="/recommended-deck.css">
+  <link rel="stylesheet" href="/skill-advice.css">
+  <script src="/app.js" defer></script>
+  <script src="/memory-visuals.js" defer></script>
+  <script src="/legend-midterm.js" defer></script>
+  <script src="/nia-choices.js" defer></script>
+  <script src="/hif-interval.js" defer></script>
+  <script src="/playbook.js" defer></script>
+  <script src="/event-choice-guide.js" defer></script>
+  <script src="/exam-decks.js" defer></script>
+  <script src="/recommended-deck.js" defer></script>
+  <script src="/guides.js" defer></script>
+  <script src="/personalized.js" defer></script>
+  <script src="/post-memory.js" defer></script>
+  <script src="/idol-operating.js" defer></script>
+  <script src="/pidol-outfit-cards.js" defer></script>
+  <script src="/idol-goal-ranks.js" defer></script>
+  <link rel="stylesheet" href="/idol-goal-ranks.css">
+  <script src="/source-recipe-readiness.js" defer></script>
+  <script src="/skill-advice.js" defer></script>
+  <link rel="stylesheet" href="/post-memory.css">
+  <link rel="stylesheet" href="/recommend-controls.css">
+  <script src="/recommend-controls.js" defer></script>
+  <script src="/scenario-items.js" defer></script>
+  <link rel="stylesheet" href="/academy-theme.css">
+  <link rel="stylesheet" href="/space-layout.css">
+  <link rel="stylesheet" href="/pidol-outfit-cards.css">
+</head>
+<body data-view="inventory">
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="/" aria-label="학마 보유노트 처음으로">
+        <span><strong>학마 보유노트</strong><small>MY PRODUCE NOTE</small></span>
+      </a>
+      <div class="nav-caption">나의 프로듀스</div>
+      <nav class="main-nav" aria-label="주 메뉴">
+        <button type="button" class="nav-button active" data-view="inventory" aria-current="page">내 보유 목록</button>
+        <button type="button" class="nav-button" data-view="recommend">편성 추천</button>
+        <button type="button" class="nav-button" data-view="skills">스킬 카드</button>
+        <button type="button" class="nav-button" data-view="guides">시나리오 공략</button>
+        <button type="button" class="nav-button" data-view="memory-output">육성 후 메모리</button>
+      </nav>
+      <div class="sidebar-bottom"><span class="local-dot"></span><span>내 PC에서 사용하는 보유노트<br><small>수집된 자료를 바탕으로 확인해요.</small></span></div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div class="breadcrumb">학원 아이돌마스터 <span>/</span> <strong id="breadcrumbCurrent">내 보유 목록</strong></div>
+        <div class="topbar-tools"><span class="player-level" id="playerLevel" hidden></span><div class="topbar-actions"></div></div>
+      </header>
+      <div class="page-content">
+        <section class="page-heading">
+          <div><div class="eyebrow">MY COLLECTION</div><h1 id="pageTitle">내 보유 목록</h1><p id="pageDescription">보유한 서포트, 아이돌, 메모리를 한곳에서 확인하세요.</p></div>
+          <div class="heading-actions"><label class="button button-secondary file-button" for="importFile"><span aria-hidden="true">↥</span> 자료 불러오기</label><input id="importFile" type="file" accept=".json,application/json" hidden><button id="refreshButton" type="button" class="button button-secondary"><span class="refresh-icon" aria-hidden="true">↻</span> 저장 목록 다시 읽기</button></div>
+        </section>
+
+        <section class="connection-banner waiting" id="connectionBanner" aria-live="polite">
+          <div class="connection-symbol" aria-hidden="true"><span></span></div>
+          <div class="connection-copy"><strong id="connectionTitle">보유정보를 기다리고 있어요</strong><p id="connectionMessage">게임에서 수집된 자료가 도착하면 여기에 표시됩니다.</p><p id="catalogStatus" hidden></p></div>
+          <div class="capture-time"><span>마지막 수집</span><strong id="captureTime">아직 수집 전</strong></div>
+        </section>
+
+        <section class="collector-mode-panel" aria-label="실행 모드">
+          <div><strong id="collectorModeTitle">일반 모드 · 저장 목록 사용</strong><p id="collectorModeMessage">수집이 필요할 때만 보유 목록을 갱신하세요.</p></div>
+          <div class="collector-mode-actions"><button type="button" id="collectorStartButton" class="button button-secondary">게임에서 보유 목록 갱신</button><button type="button" id="collectorStopButton" class="button button-secondary" hidden>수집 중지 · 일반 모드</button></div>
+        </section>
+        <section class="summary-grid" aria-label="보유정보 요약">
+          <button type="button" class="summary-card selected" data-collection="supportCards"><span class="summary-icon support" aria-hidden="true">▤</span><span class="summary-copy"><span>서포트 카드</span><strong id="supportCount">—</strong></span><span class="summary-note" id="supportCountNote">수집 대기</span></button>
+          <button type="button" class="summary-card" data-collection="idolCards"><span class="summary-icon idol" aria-hidden="true">☆</span><span class="summary-copy"><span>P아이돌</span><strong id="idolCount">—</strong></span><span class="summary-note" id="idolCountNote">수집 대기</span></button>
+          <button type="button" class="summary-card" data-collection="memories"><span class="summary-icon memory" aria-hidden="true">◇</span><span class="summary-copy"><span>메모리</span><strong id="memoryCount">—</strong></span><span class="summary-note" id="memoryCountNote">수집 대기</span></button>
+        </section>
+
+        <section id="inventoryView" class="view-panel">
+          <div class="collection-panel">
+            <div class="collection-header"><div class="collection-tabs" role="tablist" aria-label="보유정보 종류"><button type="button" role="tab" aria-selected="true" class="collection-tab active" data-collection="supportCards">서포트</button><button type="button" role="tab" aria-selected="false" class="collection-tab" data-collection="idolCards">P아이돌</button><button type="button" role="tab" aria-selected="false" class="collection-tab" data-collection="memories">메모리</button></div><span class="collection-status" id="collectionStatus">수집 대기</span></div>
+            <div class="filters"><label class="search-field" for="searchInput"><input id="searchInput" type="search" placeholder="카드 이름 · 아이돌 이름 검색" aria-label="보유 목록 검색"></label><select id="rarityFilter" aria-label="레어도 필터"><option value="">모든 레어도</option><option>SSR</option><option>SR</option><option>R</option></select><select id="planFilter" aria-label="플랜 필터"><option value="">모든 플랜</option><option value="sense">센스 (センス)</option><option value="logic">로직 (ロジック)</option><option value="anomaly">어노말리 (アノマリー)</option><option value="free">공용 (フリー)</option></select><select id="memoryBonusFilter" hidden aria-label="메모리 효과 필터"><option value="">모든 메모리 효과</option><option value="initialStats">초기 능력치 가산</option><option value="growthRatePermil">성장 보너스</option><option value="hif">H.I.F. 효과</option><option value="startSkill">시작 시 반입 스킬</option></select><select id="attributeFilter" aria-label="서포트 속성 필터"><option value="">모든 속성</option><option value="vocal">보컬 / ボーカル · Vo</option><option value="dance">댄스 / ダンス · Da</option><option value="visual">비주얼 / ビジュアル · Vi</option><option value="assist">보조 / アシスト</option></select><select id="sortSelect" aria-label="목록 정렬"><option value="name">이름순</option><option value="score" hidden>추천 점수순</option><option value="memory-score" hidden>점수 높은순</option><option value="level">레벨 높은순</option><option value="uncap">돌파 높은순</option></select></div>
+            <section id="idolGoalPanel" class="idol-goal-panel" aria-label="P아이돌 의상 비교" hidden>
+              <div class="idol-goal-controls">
+                <label>시나리오<select id="idolGoalScope"><option value="hif">일반 HIF</option><option value="hajime-regular">하지메 레귤러</option><option value="hajime-pro">하지메 프로</option><option value="hajime-master">하지메 마스터</option><option value="hajime-legend">하지메 레전드</option><option value="nia-pro">NIA 프로</option><option value="nia-master">NIA 마스터</option></select></label>
+                <label>비교 범위<select id="idolGoalOwned"><option value="owned">내 보유 카드</option><option value="all">카탈로그 전체</option></select></label>
+              </div>
+              <div class="idol-gallery-heading">
+                <h3>캐릭터</h3>
+                <div class="recommend-rail-controls" aria-label="캐릭터 이동">
+                  <button type="button" id="inventoryCharacterPrev" aria-label="이전 캐릭터" aria-controls="inventoryCharacterGrid">‹</button>
+                  <button type="button" id="inventoryCharacterNext" aria-label="다음 캐릭터" aria-controls="inventoryCharacterGrid">›</button>
+                </div>
+              </div>
+              <div id="inventoryCharacterGrid" class="pidol-character-rail" role="group" aria-label="보유 목록 캐릭터 선택" tabindex="0"></div>
+              <div class="idol-gallery-heading outfit-heading">
+                <h3 id="inventoryVariantHeading">의상</h3>
+                <div class="recommend-rail-controls" id="inventoryOutfitControls">
+                  <button type="button" data-outfit-prev="idolGoalList" aria-label="이전 의상 보기" aria-controls="idolGoalList">‹</button>
+                  <button type="button" data-outfit-next="idolGoalList" aria-label="다음 의상 보기" aria-controls="idolGoalList">›</button>
+                </div>
+              </div>
+              <p class="idol-goal-caption" id="idolGoalCount" role="status"></p>
+              <button type="button" id="retryInventoryScores" class="button button-secondary" hidden>점수 다시 불러오기</button>
+              <div id="idolGoalList" role="group" aria-labelledby="inventoryVariantHeading" tabindex="0"></div>
+            </section>
+            <div class="results-caption"><span><span id="resultCount">보유 목록이 아직 수집되지 않았습니다.</span><span id="memoryOrderNote" role="status" hidden></span></span><span>카드를 눌러 자세히 보기</span></div>
+            <div id="inventoryGrid" class="inventory-grid" aria-live="polite"></div>
+            <div class="empty-state" id="inventoryEmpty"><div class="empty-art" aria-hidden="true"><span></span><span></span><span>✦</span></div><h2>나의 컬렉션을 기다리는 중</h2><p>수집된 보유정보가 도착하면<br>카드와 메모리를 여기에서 확인할 수 있어요.</p></div>
+            <nav class="pagination" id="pagination" aria-label="목록 페이지" hidden><button id="previousPage" type="button" class="page-button" aria-label="이전 페이지">‹</button><span id="pageLabel"></span><button id="nextPage" type="button" class="page-button" aria-label="다음 페이지">›</button></nav>
+          </div>
+        </section>
+
+        <section id="recommendView" class="view-panel" aria-label="편성 추천" hidden>
+          <div id="recommendReviewNotice" class="recommend-review-notice" role="status" hidden><strong>추천 계산 검증 중</strong><p>성장률, 능력치 상한과 메모리 계산을 확인하고 있어요. 검증이 끝나면 추천을 다시 사용할 수 있습니다.</p></div>
+          <div class="recommend-layout">
+            <form id="recommendForm" class="settings-panel">
+              <div class="recommend-form-heading"><h2>육성 설정</h2></div>
+              <div class="recommend-config">
+                <div class="recommend-idol-config">
+                  <button type="button" id="openRecommendPicker" class="recommend-idol-trigger" aria-haspopup="dialog" aria-controls="recommendIdolDialog"><span class="recommend-idol-placeholder"><span aria-hidden="true">＋</span>캐릭터 선택</span><span class="recommend-select-arrow" aria-hidden="true">›</span></button>
+                  <label class="sr-only" for="idolSelect">육성할 P아이돌</label><select id="idolSelect" aria-label="육성할 P아이돌" name="idolId" hidden><option value="">보유 P아이돌에서 자동 선택</option></select>
+                  <div class="recommend-plan-line"><span>플랜</span><span id="recommendPlanBadge" class="recommend-plan-badge">아이돌에 맞춰 자동 적용</span></div>
+                  <select id="recommendPlan" aria-label="자동 적용 플랜" name="plan" hidden><option value="">아이돌에 맞추기</option><option value="sense">센스</option><option value="logic">로직</option><option value="anomaly">어노말리</option></select>
+                </div>
+                <div class="recommend-options-config">
+                  <div class="recommend-context-row"><label class="form-field" for="scenarioSelect">시나리오<select id="scenarioSelect" aria-label="시나리오" name="scenario"><option value="hajime">하지메 · 初</option><option value="nia">N.I.A.</option><option value="hif">H.I.F.</option></select></label><label class="form-field" for="eventModeSelect">게임 모드<select id="eventModeSelect" aria-label="이벤트 모드" name="eventModeId"><option value="">일반 프로듀스</option></select></label><label class="form-field" id="hajimeDifficultyField" for="hajimeDifficultySelect">하지메 난이도<select id="hajimeDifficultySelect"><option value="legend">레전드</option><option value="master">마스터</option><option value="pro">프로</option></select></label><label class="form-field" id="niaDifficultyField" for="niaDifficultySelect" hidden>NIA 난이도<select id="niaDifficultySelect"><option value="master">마스터</option><option value="pro">프로</option></select></label></div>
+                  <div class="recommend-icon-field"><span class="recommend-field-label" id="recommendStrategyLabel">육성 유형</span><div id="recommendStrategyChoices" class="recommend-icon-choices" role="group" aria-labelledby="recommendStrategyLabel"></div><select id="strategySelect" aria-label="육성 유형" name="type" hidden><option value="">자동</option></select></div>
+                  <div class="recommend-attribute-activity-row"><div class="recommend-icon-field"><span class="recommend-field-label" id="recommendAttributeLabel">중점 능력치</span><div id="recommendAttributeChoices" class="recommend-icon-choices" role="group" aria-labelledby="recommendAttributeLabel"></div><select id="targetAttributeSelect" aria-label="중점 능력치" name="targetAttribute" hidden><option value="auto">자동</option><option value="vocal">보컬</option><option value="dance">댄스</option><option value="visual">비주얼</option></select></div><div class="recommend-icon-field" id="recommendActivityField"><span class="recommend-field-label" id="recommendActivityLabel">진행 방식</span><div id="recommendActivityChoices" class="recommend-icon-choices" role="group" aria-labelledby="recommendActivityLabel"></div><select id="activityFocusSelect" aria-label="진행 방식" name="activityFocus" hidden><option value="auto">자동</option><option value="consult">상담</option><option value="outing">외출</option><option value="supply_gift">사시이레</option></select></div></div>
+                  <label class="form-field" for="memorySelectionMode">반입 메모리 추천<select id="memorySelectionMode" name="memorySelectionMode" aria-describedby="memorySelectionHint"><option value="guide">공략 기준</option><option value="stats">스탯만 보기</option></select><small id="memorySelectionHint">현재 시나리오의 스킬 기준과 반입 수치를 함께 비교합니다.</small></label>
+                  <div class="recommend-config-footer"><details id="recommendMoreOptions" class="recommend-more-options"><summary>세부 설정</summary>
+                <div class="form-row"><label class="form-field" for="goalSelect">목표<select id="goalSelect" aria-label="목표" name="goal"><option value="evaluation">육성 평가점</option><option value="memory">메모리 제작 준비</option></select></label><label class="form-field" for="producerLevelInput">프로듀서 레벨<input id="producerLevelInput" aria-label="프로듀서 레벨" name="producerLevel" type="number" min="1" step="1" placeholder="미확인"></label></div>
+                <details id="hifDeckOptions" class="hif-deck-options" aria-label="HIF 편성 조건" hidden><summary>편성 세부 조건</summary><div class="form-row"><label class="form-field" for="secondaryAttributeSelect">부속성<select id="secondaryAttributeSelect" aria-label="부속성" name="secondaryAttribute"><option value="auto">자동 비교</option><option value="vocal">보컬 / ボーカル · Vo</option><option value="dance">댄스 / ダンス · Da</option><option value="visual">비주얼 / ビジュアル · Vi</option></select></label><label class="form-field" for="deckTemplateSelect">편성 형태<select id="deckTemplateSelect" aria-label="편성 형태" name="deckTemplate"><option value="auto">자동 비교</option><option value="3-3">주속성 3 + 부속성 3</option><option value="4-2">주속성 4 + 부속성 2</option></select></label></div><p>자동은 공략에 나온 혼합 편성과 대안을 함께 비교합니다. 주속성과 부속성은 서로 다르게 선택해 주세요.</p></details>
+                <details id="memoryTargetSection" class="memory-target-section" aria-labelledby="memoryTargetHeading" hidden><summary class="memory-target-heading"><span id="memoryTargetHeading">꼭 챙길 스킬 직접 고르기</span><span id="memoryTargetCount">0 / 4</span></summary><p class="memory-target-description">보유 메모리에서 최대 4개를 고르세요. 선택한 스킬은 필수 조건으로 비교합니다.</p><div id="selectedMemorySkills" class="selected-memory-skills"></div><label class="sr-only" for="memorySkillSearch">필수 반입 스킬 검색</label><input id="memorySkillSearch" class="memory-skill-search" type="search" aria-label="필수 반입 스킬 검색" placeholder="한국어 · 일본어 스킬 이름 검색"><div id="memorySkillGrid" class="memory-skill-grid" role="group" aria-label="필수 반입 스킬 선택"></div><p id="memoryTargetMode" class="memory-target-mode">스탯 보너스 중심 비교 · 핵심 스킬 미지정</p><p id="memoryTargetNotice" class="memory-target-notice" hidden></p><p id="hifEffectTargetStatus" class="hif-effect-target-status">보유 HIF 전용 효과 확인 중</p></details>
+                <label class="form-field" id="supportActionModeField" for="supportActionMode">서포트 효과 횟수<select id="supportActionMode" aria-label="서포트 효과 횟수"><option value="route">선택 경로의 획득·카드 연계 반영</option><option value="declared">직접 지정한 행동 기준</option></select><small>일반 HIF는 리트로 SP 레슨과 서포트 이벤트 조건을 채우는 경우를 비교합니다. 상담 구매에는 그때까지 쓸 수 있는 P포인트가 필요합니다.</small></label>
+                <label class="form-field" id="hifScenarioItemField" for="hifScenarioItemPath">HIF 시나리오 아이템 경로<select id="hifScenarioItemPath"><option value="auto">편성 효과에 맞춰 비교</option><option value="none">시나리오 아이템 효과 제외</option></select></label>
+                <label class="form-field" id="hifConsultPlanField" for="hifConsultPlan">P포인트 사용처<select id="hifConsultPlan"><option value="auto">편성 효과에 맞춰 비교</option><option value="drinks">드링크 구입</option><option value="skills">SR 스킬 카드 구입</option><option value="ssr">SSR 스킬 카드 구입</option><option value="upgrade">스킬 카드 강화</option><option value="remove">스킬 카드 삭제</option><option value="customize">특별지도·인터벌 커스텀</option><option value="none">구입·관리 생략</option></select></label>
+                <label class="form-field" id="supportPoolField" for="supportPoolSelect">서포트 후보 범위<select id="supportPoolSelect"><option value="auto">자동 · 공략 밖의 신규 보유 카드도 비교</option><option value="guide">아이돌 공략에 나온 후보만 비교</option><option value="unrestricted">전체 보유 카드와 대여 후보 비교</option></select></label>
+                <label class="form-field" id="excelRouteField" for="excelRoutePreset" hidden>NIA 서포트 비교 경로<select id="excelRoutePreset" aria-label="NIA 서포트 비교 경로"><option value="auto">가능한 경로 자동 비교</option></select><small>해당 난이도·플랜에 맞는 엑셀 경로의 횟수 가정으로 비교합니다.</small></label>
+                <details id="scenarioItemSettings" hidden><summary>시작 전·육성 중 P아이템 조건</summary><div id="startItemSettings"></div><div id="rewardItemSettings"></div></details>
+                <label class="form-field" for="supportLevelMode">보유 서포트 계산 레벨<select id="supportLevelMode"><option value="uncapMax">현재 돌파의 최대 레벨까지 강화</option><option value="current">지금 보유한 레벨</option></select></label>
+                <label class="upgrade-option" for="compareSupportUpgrades"><input id="compareSupportUpgrades" type="checkbox"><span>같은 활동 방침에서 강화 전후 비교도 보기</span></label>
+                <section id="hifProfile" class="hif-profile" aria-label="HIF 계정 보너스" hidden></section>
+              </details><button id="recommendButton" type="submit" class="button button-primary recommend-submit" disabled>편성 추천</button></div>
+                  <p id="recommendAvailability" class="form-note">서포트 보유정보가 수집되면 추천받을 수 있어요.</p>
+                </div>
+              </div>
+            </form>
+            <div class="recommend-output" id="recommendOutput" hidden></div>
+          </div>
+        </section>
+        <section id="postMemoryView" class="view-panel" aria-label="육성 종료 후 메모리 선택" hidden>
+          <div id="postMemoryContent"></div>
+        </section>
+        <section id="skillAdviceView" class="view-panel" aria-label="스킬 카드 조건별 추천" hidden>
+          <div id="skillAdviceContent"><p class="skill-advice-loading" role="status">스킬 카드 자료를 불러오고 있어요.</p></div>
+        </section>
+        <section id="guidesView" class="view-panel" aria-label="시나리오 공략" hidden>
+          <div class="guide-library">
+            <div class="guide-library-heading"><div><h2>시나리오 공략</h2><p>육성할 시나리오를 고르세요. 게임에 뜬 보기와 보상은 ‘이벤트 선택지’, 시험에서 쓸 카드 순서는 ‘덱 운영법’에서 확인할 수 있어요.</p></div><span id="guideUpdatedAt"></span></div>
+            <div class="guide-scenario-tabs" role="group" aria-label="공략 시나리오"><button type="button" data-guide-scenario="hajime" aria-pressed="false">初</button><button type="button" data-guide-scenario="nia" aria-pressed="false">N.I.A.</button><button type="button" data-guide-scenario="hif" aria-pressed="true" class="active">H.I.F.</button><button type="button" data-guide-scenario="all" aria-pressed="false">전체</button><select id="guideDifficulty" aria-label="공략 난이도" hidden><option value="">모든 난이도</option><option value="regular">레귤러</option><option value="pro">프로</option><option value="master">마스터</option><option value="legend">레전드</option></select></div>
+            <div id="guideScenarioNotes" class="guide-scenario-notes"></div>
+            <div class="guide-content-tabs" role="group" aria-label="공략 종류"><button type="button" data-guide-kind="events" aria-pressed="true" class="active">이벤트 선택지·보상</button><button type="button" data-guide-kind="decks" aria-pressed="false">덱 운영법 · 시험 카드 순서</button><button type="button" data-guide-kind="memories" aria-pressed="false">반입 메모리 · 파밍</button></div>
+            <div class="guide-library-filters"><label class="search-field" for="guideSearch"><span aria-hidden="true">⌕</span><input id="guideSearch" type="search" aria-label="공략 검색" placeholder="이벤트 · 선택지 · 보상 · 스킬 이름 검색"></label><label class="sr-only" for="guideCategory">이벤트 종류</label><select id="guideCategory" aria-label="이벤트 종류"><option value="">모든 이벤트</option><option value="activity">외출</option><option value="school">수업</option><option value="business">영업</option><option value="opening">프로듀스 시작</option></select><label class="sr-only" for="guidePlan">공략 플랜</label><select id="guidePlan" aria-label="공략 플랜"><option value="">모든 플랜</option><option value="sense">센스</option><option value="logic">로직</option><option value="anomaly">어노말리</option></select></div>
+            <details class="idol-guide-browser"><summary>내 P아이돌의 고유 스킬·P아이템 운용</summary><p>정확한 P카드의 고유 조건과 여러 제작자의 운영 사례를 확인합니다.</p><div class="idol-guide-controls"><label>P아이돌<select id="idolOperatingSelect"><option value="">보유 P아이돌을 불러오는 중</option></select></label><label>시나리오<select id="idolOperatingScenario"><option value="hif">H.I.F.</option><option value="hajime">初</option><option value="nia">N.I.A.</option></select></label><label>난이도<select id="idolOperatingDifficulty"><option value="">미확인</option><option value="regular">레귤러 / REGULAR</option><option value="pro">프로 / PRO</option><option value="master">마스터 / MASTER</option></select></label><label>육성 유형<select id="idolOperatingType"><option value="fullPower">전력</option><option value="strength">강기</option><option value="preservation">온존</option><option value="concentration">집중</option><option value="goodConditionTurns">호조</option><option value="motivation">의욕</option><option value="goodImpressionTurns">호인상</option></select></label><label>검토할 PLv<input type="number" id="idolOperatingLevel" min="1" placeholder="미확인"></label><label>이벤트<select id="idolOperatingEvent"><option value="">일반 프로듀스</option></select></label><button type="button" id="idolOperatingLoad" class="button button-secondary">이 P아이돌 운용 보기</button></div><div id="idolOperatingResult"></div></details>
+            <p id="guideResultCount" class="guide-result-count" role="status">공략 자료를 불러오고 있어요.</p><div id="guideLibraryResults" class="guide-library-results"></div><button id="guideShowMore" type="button" class="button button-secondary" hidden>공략 더 보기</button>
+          </div>
+        </section>
+        <footer class="page-footer">학마 보유노트 <span>·</span> 수집된 보유정보와 선택한 육성 조건을 기준으로 비교합니다.</footer>
+      </div>
+    </main>
+  </div>
+  <dialog id="recommendIdolDialog" class="recommend-idol-dialog" aria-labelledby="recommendIdolDialogTitle">
+    <header class="recommend-dialog-heading"><div><h2 id="recommendIdolDialogTitle">육성할 아이돌 선택</h2><p id="recommendIdolScoreScope" role="status"></p><button type="button" id="retryPickerScores" class="button button-secondary" hidden>점수 다시 불러오기</button></div><button type="button" id="closeRecommendPicker" class="icon-button" aria-label="아이돌 선택 닫기">×</button></header>
+    <button type="button" id="recommendAutoIdol">전체 보유에서 자동 선택</button>
+    <div class="recommend-picker-label"><h3>캐릭터</h3><div class="recommend-rail-controls"><button type="button" data-recommend-rail="recommendCharacterGrid" data-direction="-1" aria-label="이전 캐릭터">‹</button><button type="button" data-recommend-rail="recommendCharacterGrid" data-direction="1" aria-label="다음 캐릭터">›</button></div></div>
+    <div id="recommendCharacterGrid" class="pidol-character-rail" role="group" aria-label="추천 캐릭터 선택"></div>
+    <section id="recommendVariantSection" class="variant-section" hidden>
+      <div class="recommend-picker-label"><h3 id="recommendVariantHeading">보유 의상</h3>
+        <div class="recommend-rail-controls pidol-page-controls">
+          <button type="button" data-outfit-prev="recommendVariantGrid" aria-controls="recommendVariantGrid" aria-label="이전 의상 페이지">‹</button>
+          <span data-outfit-page="recommendVariantGrid" aria-live="polite"></span>
+          <button type="button" data-outfit-next="recommendVariantGrid" aria-controls="recommendVariantGrid" aria-label="다음 의상 페이지">›</button>
+        </div>
+      </div>
+      <div id="recommendVariantGrid" class="pidol-outfit-grid" role="group" aria-labelledby="recommendVariantHeading"></div>
+    </section>
+  </dialog>
+  <dialog id="detailDialog" class="detail-dialog" aria-labelledby="detailTitle"><div class="dialog-top"><span class="panel-label" id="detailCategory">카드 상세</span><button class="icon-button" type="button" id="closeDetail" aria-label="상세 닫기">×</button></div><div id="detailContent"></div></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+</body>
+</html>

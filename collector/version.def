@@ -1,0 +1,19 @@
+LIBRARY version
+EXPORTS
+    GetFileVersionInfoA=gakumas_inventory_system_version.GetFileVersionInfoA @1
+    GetFileVersionInfoByHandle=gakumas_inventory_system_version.GetFileVersionInfoByHandle @2
+    GetFileVersionInfoExA=gakumas_inventory_system_version.GetFileVersionInfoExA @3
+    GetFileVersionInfoExW=gakumas_inventory_system_version.GetFileVersionInfoExW @4
+    GetFileVersionInfoSizeA=gakumas_inventory_system_version.GetFileVersionInfoSizeA @5
+    GetFileVersionInfoSizeExA=gakumas_inventory_system_version.GetFileVersionInfoSizeExA @6
+    GetFileVersionInfoSizeExW=gakumas_inventory_system_version.GetFileVersionInfoSizeExW @7
+    GetFileVersionInfoSizeW=gakumas_inventory_system_version.GetFileVersionInfoSizeW @8
+    GetFileVersionInfoW=gakumas_inventory_system_version.GetFileVersionInfoW @9
+    VerFindFileA=gakumas_inventory_system_version.VerFindFileA @10
+    VerFindFileW=gakumas_inventory_system_version.VerFindFileW @11
+    VerInstallFileA=gakumas_inventory_system_version.VerInstallFileA @12
+    VerInstallFileW=gakumas_inventory_system_version.VerInstallFileW @13
+    VerLanguageNameA=gakumas_inventory_system_version.VerLanguageNameA @14
+    VerLanguageNameW=gakumas_inventory_system_version.VerLanguageNameW @15
+    VerQueryValueA=gakumas_inventory_system_version.VerQueryValueA @16
+    VerQueryValueW=gakumas_inventory_system_version.VerQueryValueW @17

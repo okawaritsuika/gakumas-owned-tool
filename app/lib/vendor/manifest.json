@@ -1,0 +1,248 @@
+{
+  "source": "https://github.com/gakumas-tools/gakumas-tools",
+  "license": "BSD-3-Clause",
+  "adaptation": "ESM specifier extensions, CSV-to-module conversion, and documented local patches",
+  "localPatches": [{
+    "file": "gakumas-engine/engine/CardManager/index.js",
+    "reason": "Separate the HIF response-item basic-card generation pool from cards automatically added to the initial deck.",
+    "change": "addRandomBasicCardToDeckAtRandom uses config.generatedBasicCardIds when explicitly supplied; original defaultCardIds fallback is preserved."
+  }],
+  "files": [
+    {
+      "file": "gakumas-engine/config/IdolConfig.js",
+      "sourceSha256": "b8e71aba1496d0f0b02d9124e305e6592a01d74d0b1b03d187524e5389695599"
+    },
+    {
+      "file": "gakumas-engine/config/IdolStageConfig.js",
+      "sourceSha256": "df2c80eb0dc0b1aee539f09f56b05d6631c9e6d6f8403ea3994a53ee65abd7d5"
+    },
+    {
+      "file": "gakumas-engine/config/index.js",
+      "sourceSha256": "e05f239e877f89d9659f4e0e2e7090e0403a4fc2438e7c2ff5d74471baf8e671"
+    },
+    {
+      "file": "gakumas-engine/config/StageConfig.js",
+      "sourceSha256": "451f17f52b1463efa4cadc2e8b852f7aaf2c335441288f931e2b94e8cf0bb3a0"
+    },
+    {
+      "file": "gakumas-engine/constants.js",
+      "sourceSha256": "5aab599d92474549a7d517a4b831f613f47e9645c4932fdccd51f3c2ab0372f3"
+    },
+    {
+      "file": "gakumas-engine/engine/BuffManager.js",
+      "sourceSha256": "d785a4f12a98cb17b3cbb55581a814bb2ee84c8451f57306f128c6e5bbb354ef"
+    },
+    {
+      "file": "gakumas-engine/engine/CardManager/index.js",
+      "sourceSha256": "0507d8b96a223e59f42c52f4f70cec12ee277a47de728a6a990abf83a307bcd3"
+    },
+    {
+      "file": "gakumas-engine/engine/CardManager/targeting.js",
+      "sourceSha256": "7966126b53fdd5818577b81b74ee61e2bc019d0c5ef5822777f709dfc86eda79"
+    },
+    {
+      "file": "gakumas-engine/engine/EffectManager.js",
+      "sourceSha256": "d81e120aabc0a3ec2530c83676a26e7811ac4c9b1474c6231e478fe553aed9c1"
+    },
+    {
+      "file": "gakumas-engine/engine/EngineComponent.js",
+      "sourceSha256": "838783b0401f35b8d5f38e16cf149aacf8d7397d89b5382a14b37a2a227f71a6"
+    },
+    {
+      "file": "gakumas-engine/engine/Evaluator.js",
+      "sourceSha256": "cb5a69bf3e9c4de7dc8d2c78485599463814506a4ccefc4940893360a2c1602a"
+    },
+    {
+      "file": "gakumas-engine/engine/Executor/index.js",
+      "sourceSha256": "88fc4eea638edde33e1a84f6b0c23a33efa94de0dd80fb69f0b35ff1b9078f7e"
+    },
+    {
+      "file": "gakumas-engine/engine/Executor/resolvers.js",
+      "sourceSha256": "331dde3d8f1cb250860f6c9cc3f6993ca9e4b9742060c315697def8ef9e47baa"
+    },
+    {
+      "file": "gakumas-engine/engine/index.js",
+      "sourceSha256": "c754e977d45a627986edc35a8e4dd042ffd9cf0ae923b302b842a3823ba76648"
+    },
+    {
+      "file": "gakumas-engine/engine/StageEngine.js",
+      "sourceSha256": "91353385d91d17b997a7c564b398419a482cc336cc5e245a53ef74c52836f9c5"
+    },
+    {
+      "file": "gakumas-engine/engine/StageLogger.js",
+      "sourceSha256": "8deeca49fc27f6375f9ed3ac949772561b08cb9d092631dc57c459d51e1ace91"
+    },
+    {
+      "file": "gakumas-engine/engine/StagePlayer.js",
+      "sourceSha256": "d218ae3f0d27e9c4603b5938cc97e66a6126db9d0078a22646c595f8ebb1c770"
+    },
+    {
+      "file": "gakumas-engine/engine/TurnManager.js",
+      "sourceSha256": "e197b77ed4d2be8d3ddea02763fcfa8a5efc1ae60f57e1fe91699938cc2758e8"
+    },
+    {
+      "file": "gakumas-engine/index.js",
+      "sourceSha256": "c4f52ac2ca574268d702b1b8cd9b96a0b02439fb3cd0e362acf67c78017d6f00"
+    },
+    {
+      "file": "gakumas-engine/normalizeEffect.js",
+      "sourceSha256": "51caebc02d99a5fb41f845f0a0d0b1f49c620028edb63733274f7329ad7c8d80"
+    },
+    {
+      "file": "gakumas-engine/strategies/BaseStrategy.js",
+      "sourceSha256": "ce2fa8de8dc7b18eb2a39e05800646b36ca093e0e97f00af67071f744d24bded"
+    },
+    {
+      "file": "gakumas-engine/strategies/HeuristicStrategy.js",
+      "sourceSha256": "1f80772ff735df42947f5c2f16dcbb78de4ed8ee538eedcb4b219759775b9c25"
+    },
+    {
+      "file": "gakumas-engine/strategies/index.js",
+      "sourceSha256": "960bb4a0cfaa7f8d3238c3044f3f31b09fc9c59204dbf497d3c33ebd6b4b5ccc"
+    },
+    {
+      "file": "gakumas-engine/strategies/ManualStrategy.js",
+      "sourceSha256": "862863c6834945b576e3f6efd9695b99d29ee970940ba23077814d81b8242225"
+    },
+    {
+      "file": "gakumas-engine/strategies/PlayerStrategy.js",
+      "sourceSha256": "18fa5ee4cb5e4bc01895f7a84f5346ea17a39f3779b892be5ec99520fba41a54"
+    },
+    {
+      "file": "gakumas-engine/strategies/WeightedHeuristicStrategy.js",
+      "sourceSha256": "f80ca01f7ca5c2485e8611f7e157446799f5acf238ce5425d7ffdd0a6f65aa2e"
+    },
+    {
+      "file": "gakumas-engine/typeMultipliers.js",
+      "sourceSha256": "3e6f9b56d78c4f9a9563731047e02adceb12f825d71760fbb7d4fca8b6d59ade"
+    },
+    {
+      "file": "gakumas-engine/utils.js",
+      "sourceSha256": "933bd5debd508ca43aa37795ee77f594c8bc0773db317e335e6225318bb3fdfa"
+    },
+    {
+      "file": "gakumas-data/csv/customizations.csv.mjs",
+      "sourceSha256": "99091bc9fe0261bddd0cfbf26e631852411ec11706293caa23bcb4f1fdd46ea4"
+    },
+    {
+      "file": "gakumas-data/csv/idols.csv.mjs",
+      "sourceSha256": "de8110c78676d50813bc733783639d64adb618b2f2982cc3dc6e7cefd1091354"
+    },
+    {
+      "file": "gakumas-data/csv/p_drinks.csv.mjs",
+      "sourceSha256": "0dabeca5360d959d5a028f14f8868b34c70f4121f358456b70fe50e999af9a38"
+    },
+    {
+      "file": "gakumas-data/csv/p_idols.csv.mjs",
+      "sourceSha256": "3ab32ed73311d0baa762c06d01ec4ec41b6bef5ea1f895186a8f1fd84b911bed"
+    },
+    {
+      "file": "gakumas-data/csv/p_items.csv.mjs",
+      "sourceSha256": "429bd181e9731ad2324557e88aebbd1e40c298186c70e4ed10140743a2b64d2d"
+    },
+    {
+      "file": "gakumas-data/csv/skill_cards.csv.mjs",
+      "sourceSha256": "2b4858e2db84231665cbda6fb7b52eb9457e22aee5781781f9f1b624b78c0f63"
+    },
+    {
+      "file": "gakumas-data/csv/stages.csv.mjs",
+      "sourceSha256": "2686f4c5d4b9c8dc4700db0dab6a10377fbbcbbed40cb82400b0d75e6b01e80a"
+    },
+    {
+      "file": "gakumas-data/data/customizations.js",
+      "sourceSha256": "b3f8657d14dc0e37e46848ef0feab8d67729dab07b39bf8dc038431f765fb6c6"
+    },
+    {
+      "file": "gakumas-data/data/idols.js",
+      "sourceSha256": "c7c97df6ded18008d4892eedc8d182810b8715bf49683cd214f9914108977c5d"
+    },
+    {
+      "file": "gakumas-data/data/index.js",
+      "sourceSha256": "a09a727f3c405a74f0f1631b597e879494aa6d02593d777962af4151f439299d"
+    },
+    {
+      "file": "gakumas-data/data/pDrinks.js",
+      "sourceSha256": "d9571f377c12029d82a834ca9250d8eab8654703a344e908634df42a0a38635f"
+    },
+    {
+      "file": "gakumas-data/data/pIdols.js",
+      "sourceSha256": "2419bb282504511c7c73f7f1b8464e7da98d439fc1d1f35f8ac082dc749042d4"
+    },
+    {
+      "file": "gakumas-data/data/pItems.js",
+      "sourceSha256": "1c6bd0ae712a9954b548394b3080286f6a79dc92a70a5d24f3b2efc60e3de9e9"
+    },
+    {
+      "file": "gakumas-data/data/skillCards.js",
+      "sourceSha256": "89c7c3c1326127507bb5d8b00c40353cddda2c605fe975b4c38181ef639a8c59"
+    },
+    {
+      "file": "gakumas-data/data/stages.js",
+      "sourceSha256": "fb7ed9d0c54358d401d5e3907a206faa55891fce49f6de01ea2f1c14377f3756"
+    },
+    {
+      "file": "gakumas-data/index.js",
+      "sourceSha256": "c5520e71c688504c59e9538927bd2054ab6e6ad41d6ee6f9d87bf4205caf1731"
+    },
+    {
+      "file": "gakumas-data/utils/contestPower.js",
+      "sourceSha256": "aac16976f1ccc2dfec605cf0b6b1115450b393d730d94a3cf2a96e8b7e513c39"
+    },
+    {
+      "file": "gakumas-data/utils/csv.js",
+      "sourceSha256": "03d53afa51d0b7b1d15d9d4a5e377d53b4c29e2ae447fa05df91d484f63ce6d6"
+    },
+    {
+      "file": "gakumas-data/utils/effects.js",
+      "sourceSha256": "79a79ad319d3ef143b24bcc969c62502915375b18048bef8425fba24a821da3d"
+    },
+    {
+      "file": "gakumas-data/utils/hidden.js",
+      "sourceSha256": "2428db67fe38453d090c1785bb2fee0e8706a06d62f3971cc04605756906b147"
+    },
+    {
+      "file": "gakumas-data/utils/lazyParse.js",
+      "sourceSha256": "88c80e22a00b9a4b514e4fbfb6838dc4317306f4a6b480ed5bb8397e4bd9be0b"
+    },
+    {
+      "file": "gakumas-data/utils/parser/index.js",
+      "sourceSha256": "51e354de77eed3287a5efba7155e2226db6697c91a729ba6e3f80bac027c9a31"
+    },
+    {
+      "file": "gakumas-data/utils/parser/parser.js",
+      "sourceSha256": "52c5e34d16f91d71c7c7ae7055c3c6373200c4231d0839391dd23530b6c69e09"
+    },
+    {
+      "file": "gakumas-data/utils/parser/tokenizer.js",
+      "sourceSha256": "95dac34c325e5391313acb1e57a466af47bd4e788ad7f4926a146f88f2793d8c"
+    },
+    {
+      "file": "gakumas-data/utils/parser/tokens.js",
+      "sourceSha256": "aac316b2b08c0d5a0d321b0bfc9bbfc50be6e8657ace52040555f36936caf810"
+    },
+    {
+      "file": "gakumas-data/utils/stamina.js",
+      "sourceSha256": "50ac351d524ed5bd22bce12f73883896e869581a3dcd6c2e80a66da42fe8690b"
+    },
+    {
+      "file": "gakumas-data/utils/transformer/index.js",
+      "sourceSha256": "293557fe442a7b077c912727c5b5bb1532faaebf4cc2d43eabec77f98636d974"
+    },
+    {
+      "file": "gakumas-data/utils/transformer/serialize.js",
+      "sourceSha256": "b938564873c079675a94d930bb652e9f9b4c165a7b5c5610da146d7992ecf5cb"
+    },
+    {
+      "file": "gakumas-data/utils/transformer/transform.js",
+      "sourceSha256": "8b9d28c19b149fb543966a58738e17d85ac51b758998f3f265b0d3fdc10d563d"
+    },
+    {
+      "file": "gakumas-data/utils/validator/index.js",
+      "sourceSha256": "6ce266d7e622d8c69368bbfda19f0d9ff5d0215bc35cf224d6a6eadd822a3072"
+    },
+    {
+      "file": "gakumas-data/utils/validator/schema.js",
+      "sourceSha256": "d74eec0970423b80a2980f2e94a1a8824a633b001e360da02380f5dcef3b3fa2"
+    }
+  ]
+}
